@@ -1,0 +1,10 @@
+# File: backend/requirements.txt
+
+# Django and related packages
+Django==4.2.5
+djangorestframework==3.14.0
+django-filter==23.2
+django-cors-headers==3.14.0
+dj-rest-auth==4.2.0
+django-allauth==0.54.0
+psycopg2-binary==2.9.6  #
