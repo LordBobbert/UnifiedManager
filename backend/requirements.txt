@@ -1,32 +1,66 @@
-# File: backend/requirements.txt
-
-# Django and related packages
-Django==4.2.5
-djangorestframework==3.14.0
-django-filter==23.2
-django-cors-headers==3.14.0
-dj-rest-auth==7.0.0
-django-allauth==0.54.0
-psycopg2-binary==2.9.6  # PostgreSQL adapter for Djang
-
-# Authentication and Security
-PyJWT==2.7.0
+asgiref==3.8.1
+certifi==2024.7.4
+cffi==1.17.1
+charset-normalizer==3.3.2
+colorama==0.4.6
 cryptography==43.0.1
-
-# Intuit and QuickBooks integration
+defusedxml==0.8.0rc2
+dj-rest-auth==7.0.0
+Django==5.1.4
+django-allauth==65.3.0
+django-cors-headers==3.14.0
+django-crispy-forms==1.14.0
+django-environ==0.10.0
+django-extensions==3.2.3
+django-filter==24.3
+django-rest-auth==0.9.5
+django-rest-knox==4.2.0
+django-secure==1.0.1
+django-sslserver==0.22
+djangorestframework==3.14.0
+djangorestframework-simplejwt==5.2.2
+enum-compat==0.0.3
+et-xmlfile==1.1.0
+Faker==28.4.1
+filelock==3.15.4
+fsspec==2024.6.1
+git-filter-repo==2.47.0
+gunicorn==20.1.0
+huggingface-hub==0.24.6
+idna==3.8
 intuit-oauth==1.2.6
-
-# Deployment and management
-gunicorn==20.1.0  # Production WSGI server
-
-# Optional: For handling environment variables
-python-dotenv==1.0.0
-
-# Optional: Testing tools
-pytest==7.4.2
-pytest-django==4.5.2
-factory-boy==3.3.1
-
-# Optional: Linting and formatting
-flake8==6.1.0
-black==23.9.1
+numpy==2.1.0
+oauthlib==3.2.2
+openpyxl==3.1.5
+packaging==24.1
+pandas==2.2.2
+Pillow==10.0.0
+psycopg2==2.9.9
+psycopg2-binary==2.9.9
+pycparser==2.22
+PyJWT==2.9.0
+python-dateutil==2.9.0.post0
+python-decouple==3.8
+python-dotenv==1.0.1
+python-quickbooks==0.9.10
+python3-openid==3.2.0
+pytz==2024.1
+PyYAML==6.0.2
+regex==2024.7.24
+requests==2.32.3
+requests-oauthlib==2.0.0
+safetensors==0.4.4
+setuptools==74.1.2
+six==1.16.0
+social-auth-app-django==5.4.2
+social-auth-core==4.5.4
+sqlparse==0.5.1
+tokenizers==0.19.1
+tqdm==4.66.5
+transformers==4.44.2
+typing_extensions==4.12.2
+tzdata==2024.1
+urllib3==2.2.2
+watchdog==5.0.1
+wheel==0.45.1
+whitenoise==6.4.0
