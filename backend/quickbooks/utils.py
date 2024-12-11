@@ -1,7 +1,5 @@
-# File: backend/quickbooks/utils.py
-
+import os
 import requests
-
 from quickbooks.objects.customer import Customer
 from quickbooks import QuickBooks
 
@@ -36,10 +34,17 @@ def sync_client_to_quickbooks(client, access_token, realm_id):
     """
     Sync a client's data to QuickBooks Online as a Customer.
     """
+    # Fetch sensitive values from environment variables
+    client_id = os.getenv("QUICKBOOKS_CLIENT_ID")
+    client_secret = os.getenv("QUICKBOOKS_CLIENT_SECRET")
+
+    if not client_id or not client_secret:
+        raise EnvironmentError("QuickBooks client ID and secret must be set in environment variables.")
+
     qb_client = QuickBooks(
         sandbox=True,  # Set to False for production
-        client_id=settings.QUICKBOOKS_CLIENT_ID,
-        client_secret=settings.QUICKBOOKS_CLIENT_SECRET,
+        client_id=client_id,
+        client_secret=client_secret,
         access_token=access_token,
         company_id=realm_id,
     )

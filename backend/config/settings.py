@@ -1,5 +1,3 @@
-# File: backend/config/settings.py
-
 import os
 from datetime import timedelta
 from pathlib import Path
@@ -8,13 +6,13 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Secret Key (Use a secure key in production)
-SECRET_KEY = 'your-secret-key'
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "fallback-secret-key")
 
 # Debug Mode
-DEBUG = True
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
 # Allowed Hosts
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
 
 # Installed Apps
 INSTALLED_APPS = [
@@ -43,7 +41,7 @@ INSTALLED_APPS = [
 
     # Your apps
     'users',
-    # 'quickbooks',  # New QuickBooks app
+    'quickbooks',  # QuickBooks app
 ]
 
 # Middleware
@@ -89,11 +87,11 @@ WSGI_APPLICATION = 'config.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'your_db_name',
-        'USER': 'your_db_user',
-        'PASSWORD': 'your_db_password',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': os.getenv("DB_NAME", "your_db_name"),
+        'USER': os.getenv("DB_USER", "your_db_user"),
+        'PASSWORD': os.getenv("DB_PASSWORD", "your_db_password"),
+        'HOST': os.getenv("DB_HOST", "localhost"),
+        'PORT': os.getenv("DB_PORT", "5432"),
     }
 }
 
@@ -156,15 +154,13 @@ SIMPLE_JWT = {
 }
 
 # CORS Settings
-CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000",  # Frontend URL
-]
+CORS_ALLOWED_ORIGINS = os.getenv("CORS_ALLOWED_ORIGINS", "http://localhost:3000").split(",")
 
 # QuickBooks OAuth Configuration
-QUICKBOOKS_CLIENT_ID = "your-client-id"
-QUICKBOOKS_CLIENT_SECRET = "your-client-secret"
-QUICKBOOKS_REDIRECT_URI = "http://localhost:8000/api/quickbooks/callback/"
-QUICKBOOKS_ENVIRONMENT = "sandbox"
+QUICKBOOKS_CLIENT_ID = os.getenv("QUICKBOOKS_CLIENT_ID")
+QUICKBOOKS_CLIENT_SECRET = os.getenv("QUICKBOOKS_CLIENT_SECRET")
+QUICKBOOKS_REDIRECT_URI = os.getenv("QUICKBOOKS_REDIRECT_URI", "http://localhost:8000/api/quickbooks/callback/")
+QUICKBOOKS_ENVIRONMENT = os.getenv("QUICKBOOKS_ENVIRONMENT", "sandbox")
 
 # django-allauth Configuration
 SITE_ID = 1
@@ -185,4 +181,4 @@ LOGGING = {
         'handlers': ['console'],
         'level': 'DEBUG',
     },
-}
+} 
