@@ -16,6 +16,8 @@ ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
 
 # Installed Apps
 INSTALLED_APPS = [
+
+    'corsheaders',
     # Default Django apps
     'django.contrib.admin',
     'django.contrib.auth',
@@ -26,6 +28,7 @@ INSTALLED_APPS = [
     'django.contrib.sites',  # Required for django-allauth
 
     # Third-party apps
+
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
     'django_filters',
@@ -35,7 +38,6 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',
     'dj_rest_auth',
     'dj_rest_auth.registration',
-    'corsheaders',
     'social_django',
     'rest_framework.authtoken',  # Required for dj-rest-auth (optional, see TOKEN_MODEL setting)
 
