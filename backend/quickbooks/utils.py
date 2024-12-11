@@ -1,6 +1,6 @@
 import os
 import requests
-from quickbooks.objects.customer import Customer
+from quickbooks.objects import Customer
 from quickbooks import QuickBooks
 
 def fetch_quickbooks_customer(access_token, realm_id, customer_id):
