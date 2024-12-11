@@ -57,8 +57,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',  # Required by Allauth
+    'backend.middleware.auth.JWTAuthenticationFromCookie',  # Custom middleware
 ]
-
 
 # URL Configuration
 ROOT_URLCONF = 'config.urls'
@@ -134,7 +134,7 @@ AUTH_USER_MODEL = 'users.User'
 # Django REST Framework Settings
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
+        'backend.middleware.auth.JWTAuthenticationFromCookie',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
@@ -183,4 +183,4 @@ LOGGING = {
         'handlers': ['console'],
         'level': 'DEBUG',
     },
-} 
+}
