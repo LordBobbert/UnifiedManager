@@ -17,30 +17,28 @@ jobs:
 
       # Step 2: Set up Python
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
           python-version: '3.12'
 
       # Step 3: Install Dependencies
       - name: Install dependencies
         run: |
+          cd backend
           python -m venv venv
           source venv/bin/activate
-          pip install -r backend/requirements.txt
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
 
       # Step 4: Create ZIP Package
       - name: Create ZIP package
         run: |
-          cd backend  # Navigate into the backend directory
+          cd backend
           zip -r ../app.zip . -x "*.git*" -x "*venv*"  # Create app.zip at the root
 
-      # Step 5: Debugging - List Files
-      - name: Debugging - List files
-        run: ls -la
-
-      # Step 6: Upload Artifact for Deployment
+      # Step 5: Upload Artifact for Deployment
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: python-app
           path: app.zip
@@ -52,14 +50,18 @@ jobs:
     steps:
       # Step 1: Download Artifact
       - name: Download artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: python-app
 
       # Step 2: Deploy to Azure Web App
       - name: Deploy to Azure Web App
-        uses: azure/webapps-deploy@v2
+        uses: azure/webapps-deploy@v3
         with:
           app-name: 'unifiedgymmanager'  # Name of your Azure Web App
           package: './app.zip'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE }}
+          startup-command: >
+            cd backend &&
+            python -m pip install -r requirements.txt &&
+            gunicorn config.wsgi:application --bind 0.0.0.0:8000
