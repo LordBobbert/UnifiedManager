@@ -21,16 +21,20 @@ jobs:
 
       - name: Create and start virtual environment
         run: |
-          cd backend
-          python -m venv venv
-          source venv/bin/activate
+          python -m venv backend/venv
+          source backend/venv/bin/activate
 
       - name: Install dependencies
         run: |
           cd backend
           pip install -r requirements.txt
 
-      # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
+      - name: Run tests (Optional but Recommended)
+        run: |
+          cd backend
+          source venv/bin/activate
+          python manage.py test  # Update with your testing framework if needed
+
       - name: Zip artifact for deployment
         run: |
           cd backend
@@ -72,4 +76,4 @@ jobs:
         id: deploy-to-webapp
         with:
           app-name: 'unifiedgymmanager'
-          slot-name: 'Production'
+          package: './'  # Ensure the deployment package is the unzipped folder
